@@ -25,7 +25,7 @@ void simpleStream() {
   controller.close();
 }
 
-Stream<void> simplePeriodicStream() async* {
+void simplePeriodicStream() {
   final controller = StreamController<int>();
 
   // Симулируем асинхронное событие
