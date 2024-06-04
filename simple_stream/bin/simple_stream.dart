@@ -1,8 +1,10 @@
 import 'dart:async';
 
-void main() {
+void main() async {
   simpleStream();
   simplePeriodicStream();
+  // await simpleAsyncFunction();
+  // simpleAsyncFunction2();
 }
 
 void simpleStream() {
@@ -23,7 +25,7 @@ void simpleStream() {
   controller.close();
 }
 
-void simplePeriodicStream() {
+Stream<void> simplePeriodicStream() async* {
   final controller = StreamController<int>();
 
   // Симулируем асинхронное событие
@@ -39,4 +41,21 @@ void simplePeriodicStream() {
   controller.stream.listen((data) {
     print('Получено: $data');
   });
+}
+
+// ========================Асинхронность===========================
+
+Future<void> simpleAsyncFunction() async {
+  print('1');
+  //Дожидаемся завершения ф-ии
+  await Future.delayed(Duration(seconds: 1), () => print('2'));
+  print('3');
+  print('\n====================\n');
+}
+
+Future<void> simpleAsyncFunction2() async {
+  print('1');
+  //Не дожидаемся завершения ф-ии
+  Future.delayed(Duration(seconds: 1), () => print('2'));
+  print('3');
 }
